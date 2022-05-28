@@ -1,0 +1,24 @@
+<html>
+
+<head></head>
+
+<body>
+    <div>
+        <p>===================================</p>
+    </div>
+    <div>
+        {% for angka in value %}
+        <p>===================================</p>
+        <li>{{angka}}</li>
+        {% if angka %2 == 0 %}
+        <p>ini genap</p>
+        {% else %}
+        <p>ini ganjil</p>
+        {% endif %}
+        {% endfor %}
+        <p>===================================</p>
+    </div>
+        
+    
+    
+</html>
