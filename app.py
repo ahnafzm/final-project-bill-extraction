@@ -7,6 +7,8 @@ import ocr
 from PIL import Image
 import requests
 
+from utils.general import methods
+
 app = Flask(__name__)
 app.secret_key = b'\xcc^\x91\xea\x17-\xd0W\x03\xa7\xf8J0\xac8\xc5'
 
@@ -44,10 +46,12 @@ def login():
 def home():
   return render_template('home.html')
 
-@app.route('/dashboard/')
+@app.route('/dashboard/', methods=['GET'])
 @login_required
 def dashboard():
-  return render_template('dashboard.html')
+  harga = session['user']['harga']
+  diskon = session['user']['harga']
+  return render_template('dashboard.html', harga = harga, diskon=diskon)
 
 @app.route('/dashboard/cek', methods=['GET'])
 def cek():
@@ -69,16 +73,13 @@ def scans():
 
     db.users.update_one(
         {"_id":id},
-        {'$push':{"disc" : {'$each' : semua[0]}}})
+        {'$push':{"produk" : {'$each' : semua[0]}}})
     db.users.update_one(
         {"_id":id},
         {'$push':{"hargadisc" : {'$each' : semua[1]}}})
     db.users.update_one(
         {"_id":id},
         {'$push':{"harga" : {'$each' : semua[2]}}})
-    db.users.update_one(
-        {"_id":id},
-        {'$push':{"produk" : {'$each' : semua[3]}}})
 
     pesan = "berhasil"
     #return pesan

@@ -25,36 +25,100 @@
       </p>
     
     </div>
-
-    <div>
-      <form action = "http://127.0.0.1/dashboard/upload" method = "POST" 
-      enctype = "multipart/form-data">
-      <input type = "file" name = "file" />
-      <input type = "submit"/>
-   </form>
-      </form>
-    </div>
-    <div>
-      <p>Pesan : {{ messege_info }} </p>
-    </div>
-  <div><div>
-    <a href="http://127.0.0.1/dashboard/scan">SCAANNN</a>
   </div>
-    
-  </div>
-  <div>
-    <div class="struk">
 
-      <h2 class="center">Hasil Ekstrasi</h2>
 
-      <p>
-        <strong>Produk:</strong> {{ session['user']['produk'] }}<br>
-        <strong>Harga Produk:</strong> {{ session['user']['harga'] }}<br>
-        <strong>Diskon:</strong> {{ session['user']['disc'] }}<br>
-        <strong>Diskon:</strong> {{ session['user']['hargadisc'] }}
-      </p>
+  <div class="card-wrapper">
+    <div class="='card">
+      <div>
+        <form action="http://127.0.0.1/dashboard/upload" method = "POST" 
+        enctype = "multipart/form-data">
+        <input type = "file" name = "file" />
+        <input type = "submit"/>
+      </form>  
+      </div>
+      <div>
+        <p>Pesan : {{ messege_info }} </p>
+      </div>
+      <div>
+        <a href="http://127.0.0.1/dashboard/scan">SCAANNN</a>
+      </div>
+      
     
     </div>
+
   </div>
+    
+  <div class="card-wrapper">
+    <div>
+      <div class="card">
+  
+        <h2 class="center">Produk</h2>
+  
+        <p>
+          {% for prod in session['user']['produk'] %}
+          <li>{{ prod }}</li>
+          {% endfor %}
+          
+        </p>
+      
+      </div>
+    </div>
+    <div>
+      <div class="card">
+  
+        <h2 class="center">Harga</h2>
+  
+        <p>
+          {% for prod in session['user']['harga'] %}
+          <li>{{ prod }}</li>
+          {% endfor %}
+          
+        </p>
+      </div>
+    </div>
+  
+    <div>
+      <div class="card">
+  
+        <h2 class="center">Diskon</h2>
+  
+        <p>
+          {% for prod in session['user']['hargadisc'] %}
+          <li>{{ prod }}</li>
+          {% endfor %}
+          
+        </p>
+      
+      </div>
+    </div>
+    <div>
+      <div class="card">
+  
+        <h2 class="center">Total</h2>
+        <script>
+          const harga = harga ;
+          const diskon = diskon;
+          let sum_harga = 0;
+          let sum_diskon = 0;
+          
+          for (let i = 0; i < harga.length; i++) {
+              sum_harga += harga[i];
+          }
+          for (let j = 0; j < diskon.length; j++) {
+              sum_harga += diskon[j];
+          }
+          
+          let sum_total = sum_harga - sum_diskon;
+          
+          document.getElementById("demo").innerHTML = sum_total;
+          </script>
+  
+      </div>
+    </div>
+
+  </div>
+  
+
   </div>
 {% endblock %}

@@ -216,6 +216,10 @@ def diskon1(ocr_text):
     inti = []
     harga =[]
     produk =[]
+    inthdisc = []
+    inti2 = []
+    kp = []
+    intharga = []
     for i in range(len(ocr_text)):
         if ("disc" in ocr_text[i]) == True:
             disc.append(ocr_text[i])
@@ -224,6 +228,9 @@ def diskon1(ocr_text):
                 hdisc.append(ocr_text[i+1])
         except (IndexError):
             del disc[-1]
+    for i in range(len(hdisc)):
+        inthdisc.append(int(re.sub("[,~-]", "", hdisc[i])))
+    
     for i in range (len(ocr_text)):
         if ocr_text[i] not in (disc):
             if ocr_text[i] not in (hdisc):
@@ -231,8 +238,22 @@ def diskon1(ocr_text):
     for i in range(len(inti)):
         if re.findall(r'([0-9]{1,3}(?=\,))',inti[i]):
             harga.append(inti[i])
+    harga2 = harga.copy()
+    for i in range(len(inti)):
+        if re.findall('^[-+]?[0-9]+$', inti[i]):
+            inti2.append(inti[i])
+    for i in inti2:
+        harga.append(i)
+    for i in range(len(inti)):
         if (inti[i] not in harga)==True:
             produk.append(inti[i])
+    for i in range(len(inti)):
+        if re.findall('^[0-9]?0+$', inti[i]):
+            kp.append(inti[i])
+    for i in kp:
+        harga2.append(i)
+    harga21 = harga2[1::2]
+    for i in range(len(harga21)):
+        intharga.append(int(re.sub(",", "", harga21[i])))
     
-            
-    return disc, hdisc, harga[1::2], produk
+    return produk, inthdisc, intharga

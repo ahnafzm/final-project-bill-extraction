@@ -27,7 +27,6 @@ class User:
       "name": request.form.get('name'),
       "email": request.form.get('email'),
       "password": request.form.get('password'),
-      "disc" : [],
       "hargadisc" : [],
       "harga" : [],
       "produk" : []
