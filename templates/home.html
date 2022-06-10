@@ -9,14 +9,20 @@
 
       <form name="signup_form">
 
-        <label for="name">Name</label>
-        <input type="text" name="name" class="field" required>
+        <div class="Username">
+          <label for="name">Name</label>
+          <input type="text" name="name" class="field" required>
+        </div>
+        
+        <div class="Email">
+            <label for="email">Email</label>
+            <input type="email" name="email" class="field"  required>
+        </div>
 
-        <label for="email">Email</label>
-        <input type="email" name="email" class="field" required>
-
-        <label for="password">Password</label>
-        <input type="password" name="password" class="field" required>
+        <div class="Password">
+          <label for="password">Password</label>
+          <input type="password" name="password" class="field" required>
+        </div>
 
         <p class="error error--hidden"></p>
 

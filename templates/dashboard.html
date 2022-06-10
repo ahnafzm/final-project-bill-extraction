@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <div class="card-wrapper">
+  <div class="card-wrapper-dashboard">
 
-    <div class="card">
+    <!-- <div class="card">
 
       <h1 class="center">Dashboard</h1>
       <p class="center">You are currently logged in.</p>
@@ -12,49 +12,61 @@
         <a href="/user/signout" class="btn btn--secondary">Sign Out</a>
       </div>
     
+    </div> -->
+    <div class="Top">
+      <div class="card">
+          <h2 class="center">Hello!</h2>
+          <p>
+            <!-- <strong>ID:</strong> {{ session['user']['_id'] }}<br> -->
+            <p style="text-align: center; font-weight: bold;">{{ session['user']['name'] }}</p>
+            <p style="text-align: center; font-size:16px;">{{ session['user']['email'] }}</p> 
+          </p>
+          <div class="center">
+            <a href="/user/signout" class="btn btn--secondary">Sign Out</a>
+          </div>
+      </div>
     </div>
-
-    <div class="card">
-
-      <h2 class="center">Your Info</h2>
-
-      <p>
-        <strong>ID:</strong> {{ session['user']['_id'] }}<br>
-        <strong>Name:</strong> {{ session['user']['name'] }}<br>
-        <strong>Email:</strong> {{ session['user']['email'] }}
-      </p>
-    
-    </div>
-
-    <div>
-      <form action = "http://127.0.0.1/dashboard/upload" method = "POST" 
-      enctype = "multipart/form-data">
-      <input type = "file" name = "file" />
-      <input type = "submit"/>
-   </form>
+     
+    <div class="Bottom">
+        <div>
+          <form action = "http://127.0.0.1/dashboard/upload" method = "POST" 
+          enctype = "multipart/form-data">
+          <input class="tombolUpload" type = "file" title="Upload" />
+          <input class="tombolSubmit" type = "submit"/>
       </form>
-    </div>
-    <div>
-      <p>Pesan : {{ messege_info }} </p>
-    </div>
-  <div><div>
-    <a href="http://127.0.0.1/dashboard/scan">SCAANNN</a>
-  </div>
-    
-  </div>
-  <div>
-    <div class="struk">
+          </form>
+        </div>
+        <div>
+          <p style="text-align: center ;">{{ messege_info }}</p>
+        </div>
+      <div>
+        <div style="display: flex; justify-content: center;">
+          <a class="ScanButton" href="http://127.0.0.1/dashboard/scan">Scan</a>
+        </div>
+        
+      </div>
+      <div>
+        <div class="struk">
 
-      <h2 class="center">Hasil Ekstrasi</h2>
+          <h2 style="padding-top:2px;" class="center">Hasil Ekstrasi</h2>
 
-      <p>
-        <strong>Produk:</strong> {{ session['user']['produk'] }}<br>
-        <strong>Harga Produk:</strong> {{ session['user']['harga'] }}<br>
-        <strong>Diskon:</strong> {{ session['user']['disc'] }}<br>
-        <strong>Diskon:</strong> {{ session['user']['hargadisc'] }}
-      </p>
-    
+          <table>
+            <tr>
+              <th scope="produk">Produk</th>
+              <th scope="harga">Harga Produk</th>
+              <th scope="diskon">Diskon</th>
+              <th scope="harga diskon">Diskon</th>
+            </tr>
+            <tr>
+              <td>{{ session['user']['produk'] }}</td>
+              <td>{{ session['user']['harga'] }}</td>
+              <td>{{ session['user']['disc'] }}</td>
+              <td>{{ session['user']['hargadisc'] }}</td>
+            </tr>
+          </table>
+        
+        </div>
+      </div>
     </div>
-  </div>
   </div>
 {% endblock %}
