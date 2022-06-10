@@ -1,53 +1,44 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <div class="card-wrapper">
+  <div class="card-wrapper-dashboard">
 
-    <div class="card">
-
-      <h1 class="center">Dashboard</h1>
-      <p class="center">You are currently logged in.</p>
-
-      <div class="center">
-        <a href="/user/signout" class="btn btn--secondary">Sign Out</a>
+    <div class="Top">
+      <div class="card">
+          <h2 class="center">Hello!</h2>
+          <p>
+            <!-- <strong>ID:</strong> {{ session['user']['_id'] }}<br> -->
+            <p style="text-align: center; font-weight: bold;">{{ session['user']['name'] }}</p>
+            <p style="text-align: center; font-size:16px;">{{ session['user']['email'] }}</p> 
+          </p>
+          <div class="center">
+            <a href="/user/signout" class="btn btn--secondary">Sign Out</a>
+          </div>
       </div>
-    
     </div>
 
-    <div class="card">
-
-      <h2 class="center">Your Info</h2>
-
-      <p>
-        <strong>ID:</strong> {{ session['user']['_id'] }}<br>
-        <strong>Name:</strong> {{ session['user']['name'] }}<br>
-        <strong>Email:</strong> {{ session['user']['email'] }}
-      </p>
-    
-    </div>
-  </div>
-
-
-  <div class="card-wrapper">
-    <div class="='card">
+    <div class="='bottom">
       <div>
-        <form action="http://127.0.0.1/dashboard/upload" method = "POST" 
+        <form action = "http://127.0.0.1/dashboard/upload" method = "POST" 
         enctype = "multipart/form-data">
-        <input type = "file" name = "file" />
-        <input type = "submit"/>
-      </form>  
+        <input class="tombolUpload" type = "file" name="file" />
+        <input class="tombolSubmit" type = "submit"/>
+    </form>
+        </form>
       </div>
       <div>
-        <p>Pesan : {{ messege_info }} </p>
+        <p style="text-align: center ;">{{ messege_info }}</p>
       </div>
-      <div>
-        <a href="http://127.0.0.1/dashboard/scan">SCAANNN</a>
+    <div>
+      <div style="display: flex; justify-content: center;">
+        <a class="ScanButton" href="http://127.0.0.1/dashboard/scan">Scan</a>
       </div>
+      
+    </div>
       
     
     </div>
 
-  </div>
     
   <div class="card-wrapper">
     <div>
