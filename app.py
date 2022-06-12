@@ -50,8 +50,9 @@ def home():
 @login_required
 def dashboard():
   harga = session['user']['harga']
-  diskon = session['user']['harga']
-  return render_template('dashboard.html', harga = harga, diskon=diskon)
+  diskon = session['user']['hargadisc']
+  total = sum(harga) - sum(diskon)
+  return render_template('dashboard.html', total=total)
 
 @app.route('/dashboard/cek', methods=['GET'])
 def cek():
@@ -80,10 +81,14 @@ def scans():
     db.users.update_one(
         {"_id":id},
         {'$push':{"harga" : {'$each' : semua[2]}}})
+    
+    harga = session['user']['harga']
+    diskon = session['user']['hargadisc']
+    total = sum(harga) - sum(diskon)
 
     pesan = "berhasil"
     #return pesan
-    return render_template('dashboard.html', messege_info=pesan)
+    return render_template('dashboard.html', messege_info=pesan, total=total)
 
 
 

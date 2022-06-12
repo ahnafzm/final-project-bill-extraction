@@ -41,4 +41,3 @@ $("form[name=login_form").submit(function(e) {
 
   e.preventDefault();
 });
-

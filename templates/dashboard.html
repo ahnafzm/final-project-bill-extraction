@@ -21,10 +21,10 @@
       <div>
         <form action = "http://127.0.0.1/dashboard/upload" method = "POST" 
         enctype = "multipart/form-data">
-        <input class="tombolUpload" type = "file" name="file" />
+        <input class="tombolUpload" type = "file" name="file" id="img" style="margin: auto;"/>
         <input class="tombolSubmit" type = "submit"/>
     </form>
-        </form>
+
       </div>
       <div>
         <p style="text-align: center ;">{{ messege_info }}</p>
@@ -62,7 +62,7 @@
   
         <p>
           {% for prod in session['user']['harga'] %}
-          <li>{{ prod }}</li>
+          <li>Rp.{{ prod }},-</li>
           {% endfor %}
           
         </p>
@@ -76,7 +76,7 @@
   
         <p>
           {% for prod in session['user']['hargadisc'] %}
-          <li>{{ prod }}</li>
+          <li>Rp.{{ prod }},-</li>
           {% endfor %}
           
         </p>
@@ -87,23 +87,7 @@
       <div class="card">
   
         <h2 class="center">Total</h2>
-        <script>
-          const harga = harga ;
-          const diskon = diskon;
-          let sum_harga = 0;
-          let sum_diskon = 0;
-          
-          for (let i = 0; i < harga.length; i++) {
-              sum_harga += harga[i];
-          }
-          for (let j = 0; j < diskon.length; j++) {
-              sum_harga += diskon[j];
-          }
-          
-          let sum_total = sum_harga - sum_diskon;
-          
-          document.getElementById("demo").innerHTML = sum_total;
-          </script>
+       <p style="text-align: center; font-weight: bold">Rp.{{ total }},-</p>
   
       </div>
     </div>

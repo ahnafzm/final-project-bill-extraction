@@ -25,7 +25,7 @@ from utils.torch_utils import select_device, time_sync
 
 @torch.no_grad()
 def run(
-        weights='custom_model/last.pt',  # model.pt path(s)
+        weights='custom_model/best.pt',  # model.pt path(s)
         source=ROOT / 'data/images',  # file/dir/URL/glob, 0 for webcam
         data=ROOT / 'data/coco128.yaml',  # dataset.yaml path
         imgsz=(640, 640),  # inference size (height, width)
@@ -210,7 +210,7 @@ def connect():
     return text
 
 
-def diskon1(ocr_text):
+def diskon1(ocr_text): 
     disc=[]
     hdisc = []
     inti = []
@@ -219,9 +219,12 @@ def diskon1(ocr_text):
     inthdisc = []
     inti2 = []
     kp = []
-    intharga = []
+    total = []
+    akhir_harga = []
     for i in range(len(ocr_text)):
-        if ("disc" in ocr_text[i]) == True:
+        if ("disc" in ocr_text[i])==True:
+            disc.append(ocr_text[i])
+        if re.findall("di..*on", ocr_text[i]):
             disc.append(ocr_text[i])
         try:
             if ocr_text[i] in disc:
@@ -229,31 +232,28 @@ def diskon1(ocr_text):
         except (IndexError):
             del disc[-1]
     for i in range(len(hdisc)):
-        inthdisc.append(int(re.sub("[,~-]", "", hdisc[i])))
+        inthdisc.append(int(re.sub("[-~,\s+()]", "", hdisc[i])))
     
-    for i in range (len(ocr_text)):
+    for i in range(len(ocr_text)):
         if ocr_text[i] not in (disc):
             if ocr_text[i] not in (hdisc):
                 inti.append(ocr_text[i])
     for i in range(len(inti)):
         if re.findall(r'([0-9]{1,3}(?=\,))',inti[i]):
             harga.append(inti[i])
-    harga2 = harga.copy()
-    for i in range(len(inti)):
         if re.findall('^[-+]?[0-9]+$', inti[i]):
-            inti2.append(inti[i])
-    for i in inti2:
-        harga.append(i)
+            harga.append(inti[i])
     for i in range(len(inti)):
         if (inti[i] not in harga)==True:
             produk.append(inti[i])
-    for i in range(len(inti)):
-        if re.findall('^[0-9]?0+$', inti[i]):
-            kp.append(inti[i])
-    for i in kp:
-        harga2.append(i)
-    harga21 = harga2[1::2]
+    for i in range(len(harga)):
+        kp.append(re.sub("[-~,\s+()]", "", harga[i]))
+    for i in range(len(kp)):
+        if re.findall('^[0-9]?..0+$', kp[i]):
+            akhir_harga.append(kp[i])
+    harga21 = akhir_harga[1::2]
     for i in range(len(harga21)):
-        intharga.append(int(re.sub(",", "", harga21[i])))
+        total.append(int(harga21[i]))
+
     
-    return produk, inthdisc, intharga
+    return produk, inthdisc, total
