@@ -13,8 +13,8 @@
   --grey-medium: #78909C;
   --grey-dark: #455A64;
   --primary: #3DBD9F;
-  --primary-dark: #3F8E7C;
-  --secondary: #3DBD9F;
+  --primary-dark: #368B77;
+  --secondary: #CFD8DC;
   --secondary-dark: #B0BEC5;
   --red: #EF4836;
 }
@@ -30,7 +30,7 @@ body {
   font-size: 18px;
   line-height: 28px;
   color: var(--black);
-  background: linear-gradient(249.14deg, rgba(61, 189, 159, 0.84) 5.6%, #FEF7F7 95.19%);
+  background: linear-gradient(249.23deg, rgba(61, 189, 159, 0.84) 4.52%, rgba(255, 255, 255, 0.6) 95.71%);
 }
 
 /* Typography */
@@ -69,21 +69,42 @@ p {
   margin: 0 auto;
   padding: 90px 30px;
   flex-wrap: wrap;
-  display: flex;
-  flex-direction: column;
   justify-content: center;
-  align-items: center;
+  display: flex;
+  column-gap: 32px;
+  border: solid;
 }
 
-.Top {
+.card-wrapper-table {
+  margin: 0 auto;
+  padding: 50px 30px;
+  flex-wrap: wrap;
+  justify-content: center;
   display: flex;
-  column-gap: 10px;
 }
 
 .card {
   margin: 0 30px 60px;
   padding: 20px 40px;
   width: 460px;
+  box-shadow: 0 8px 26px -4px rgba(0,0,0,0.15);
+  border-radius: 15px;
+  background: var(--white);
+}
+
+.card-dashboard {
+  margin: 0 30px 60px;
+  padding: 32px 40px;
+  width: 460px;
+  box-shadow: 0 8px 26px -4px rgba(0,0,0,0.15);
+  border-radius: 15px;
+  background: var(--white);
+}
+
+.card-table {
+  margin: 0 15px 60px;
+  padding: 20px 40px;
+  width: 200px;
   box-shadow: 0 8px 26px -4px rgba(0,0,0,0.15);
   border-radius: 15px;
   background: var(--white);
@@ -131,11 +152,10 @@ label {
   color: var(--almost-black);
   border: 1px solid var(--grey);
   border-radius: 15px;
-  box-shadow: inset 0 5px 5px rgba(0,0,0,0.1);
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
   display: block;
   background: var(--almost-white);
   transition: border-color .15s ease;
-  
 }
 
 .field:focus {
@@ -180,12 +200,12 @@ label {
 }
 
 .btn--secondary {
-  color: var(--almost-black);
-  background: var(--secondary);
+  color: var(--white);
+  background: var(--primary);
 }
 
 .btn--secondary:hover {
-  background: var(--secondary-dark);
+  background: var(--primary-dark);
 }
 
 input[type=submit] {
@@ -193,33 +213,25 @@ input[type=submit] {
   display: block;
 }
 
-input[type=file] {
-  
+.Top {
+  display: flex;
+  justify-content: center;
+  margin: 12px;;
 }
 
-.tombolSubmit {
-  margin: 0 0 24px;
-  padding: 11px 30px 10px;
-  font-size: 14px;
-  line-height: 24px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: 600;
-  text-decoration: none;
-  color: var(--white);
-  border: none;
-  border-radius: 15px;
-  outline: none;
-  cursor: pointer;
-  display: inline-block;
-  background: var(--primary);
-  transition: color .15s ease, background-color .15s ease;
+.bottom {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 12px;
+  row-gap: 0px;
 }
 
 .tombolUpload {
-  margin: 0 0 24px;
-  padding: 11px 5px 10px;
-  padding-left: 200px;;
+  display: flex;
+  justify-content: center;
+  margin: 0 0 0px;
+  padding: 15px 0px 10px;
   font-size: 14px;
   line-height: 24px;
   text-transform: uppercase;
@@ -236,13 +248,30 @@ input[type=file] {
   transition: color .15s ease, background-color .15s ease;
 }
 
-::file-selector-button {
-  display: none;
+.tombolSubmit {
+  display: flex;
+  justify-content: center;
+  margin: 0 0 0px;
+  padding: 15px 60px 15px;
+  font-size: 14px;
+  line-height: 24px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--almost-black);
+  border: none;
+  border-radius: 15px;
+  outline: none;
+  cursor: pointer;
+  display: inline-block;
+  background: var(--secondary);
+  transition: color .15s ease, background-color .15s ease;
 }
 
 .ScanButton {
-  margin: 0 0 24px;
-  padding: 11px 30px 10px;
+  margin: 0 0 0;
+  padding: 15px 125px 15px;
   font-size: 14px;
   line-height: 24px;
   text-transform: uppercase;
@@ -259,15 +288,13 @@ input[type=file] {
   transition: color .15s ease, background-color .15s ease;
 }
 
-table, th, td {
-  border: 1px white ;
-  border-collapse: separate; 
-  border-spacing: 40px 15px;
-
+::-webkit-file-upload-button {
+  background: transparent;
+  border: none;
+  color: transparent;
 }
 
-.struk {
-  box-shadow: 0 8px 26px -4px rgba(0,0,0,0.15);
+.UploadBox {
+  background: #3DBD9F;
   border-radius: 15px;
-  background: var(--white);
 }

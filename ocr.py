@@ -25,7 +25,7 @@ from utils.torch_utils import select_device, time_sync
 
 @torch.no_grad()
 def run(
-        weights='custom_model/last.pt',  # model.pt path(s)
+        weights='custom_model/best.pt',  # model.pt path(s)
         source=ROOT / 'data/images',  # file/dir/URL/glob, 0 for webcam
         data=ROOT / 'data/coco128.yaml',  # dataset.yaml path
         imgsz=(640, 640),  # inference size (height, width)
@@ -210,29 +210,50 @@ def connect():
     return text
 
 
-def diskon1(ocr_text):
+def diskon1(ocr_text): 
     disc=[]
     hdisc = []
     inti = []
     harga =[]
     produk =[]
+    inthdisc = []
+    inti2 = []
+    kp = []
+    total = []
+    akhir_harga = []
     for i in range(len(ocr_text)):
-        if ("disc" in ocr_text[i]) == True:
+        if ("disc" in ocr_text[i])==True:
+            disc.append(ocr_text[i])
+        if re.findall("di..*on", ocr_text[i]):
             disc.append(ocr_text[i])
         try:
             if ocr_text[i] in disc:
                 hdisc.append(ocr_text[i+1])
         except (IndexError):
             del disc[-1]
-    for i in range (len(ocr_text)):
+    for i in range(len(hdisc)):
+        inthdisc.append(int(re.sub("[-~,\s+()]", "", hdisc[i])))
+    
+    for i in range(len(ocr_text)):
         if ocr_text[i] not in (disc):
             if ocr_text[i] not in (hdisc):
                 inti.append(ocr_text[i])
     for i in range(len(inti)):
         if re.findall(r'([0-9]{1,3}(?=\,))',inti[i]):
             harga.append(inti[i])
+        if re.findall('^[-+]?[0-9]+$', inti[i]):
+            harga.append(inti[i])
+    for i in range(len(inti)):
         if (inti[i] not in harga)==True:
             produk.append(inti[i])
+    for i in range(len(harga)):
+        kp.append(re.sub("[-~,\s+()]", "", harga[i]))
+    for i in range(len(kp)):
+        if re.findall('^[0-9]?..0+$', kp[i]):
+            akhir_harga.append(kp[i])
+    harga21 = akhir_harga[1::2]
+    for i in range(len(harga21)):
+        total.append(int(harga21[i]))
+
     
-            
-    return disc, hdisc, harga[1::2], produk
+    return produk, inthdisc, total
