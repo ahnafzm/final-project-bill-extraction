@@ -3,8 +3,12 @@
 {% block content %}
   <div class="card-wrapper-dashboard">
 
+    <div class="DashboardText">
+      <h2>Selamat Datang, Website ini dibuat untuk Melakukan Scan pada Struk Pembelian kalian dan di catat dalam database</h2>
+    </div>
+
     <div class="Top">
-      <div class="card">
+      <div class="card-dashboard">
           <h2 class="center">Hello!</h2>
           <p>
             <!-- <strong>ID:</strong> {{ session['user']['_id'] }}<br> -->
@@ -17,20 +21,19 @@
       </div>
     </div>
 
-    <div class="='bottom">
-      <div>
-        <form action = "http://127.0.0.1/dashboard/upload" method = "POST" 
-        enctype = "multipart/form-data">
-        <input class="tombolUpload" type = "file" name="file" id="img" style="margin: auto;"/>
-        <input class="tombolSubmit" type = "submit"/>
-    </form>
-
+    <div class="bottom">
+      <div class="UploadBox">
+        <form action = "http://127.0.0.1/dashboard/upload" method = "POST" enctype = "multipart/form-data">
+          <input class="tombolUpload" type = "file" name="file" />
+          <p style="text-align: center ; font-size: 13px; color: white;">Foto harus Jelas dan Vertikal</p>
+          <input class="tombolSubmit" type = "submit"/>
+        </form>
       </div>
       <div>
         <p style="text-align: center ;">{{ messege_info }}</p>
       </div>
     <div>
-      <div style="display: flex; justify-content: center;">
+      <div >
         <a class="ScanButton" href="http://127.0.0.1/dashboard/scan">Scan</a>
       </div>
       
@@ -40,9 +43,9 @@
     </div>
 
     
-  <div class="card-wrapper">
+  <div class="card-wrapper-table">
     <div>
-      <div class="card">
+      <div class="card-table">
   
         <h2 class="center">Produk</h2>
   
@@ -56,13 +59,13 @@
       </div>
     </div>
     <div>
-      <div class="card">
+      <div class="card-table">
   
         <h2 class="center">Harga</h2>
   
         <p>
           {% for prod in session['user']['harga'] %}
-          <li>Rp.{{ prod }},-</li>
+          <li>Rp.{{ prod }},</li>
           {% endfor %}
           
         </p>
@@ -70,13 +73,13 @@
     </div>
   
     <div>
-      <div class="card">
+      <div class="card-table">
   
         <h2 class="center">Diskon</h2>
   
         <p>
           {% for prod in session['user']['hargadisc'] %}
-          <li>Rp.{{ prod }},-</li>
+          <li>Rp.{{ prod }},</li>
           {% endfor %}
           
         </p>
@@ -84,11 +87,27 @@
       </div>
     </div>
     <div>
-      <div class="card">
+      <div class="card-table">
   
         <h2 class="center">Total</h2>
-       <p style="text-align: center; font-weight: bold">Rp.{{ total }},-</p>
-  
+        <!-- <script>
+          const harga = harga ;
+          const diskon = diskon;
+          let sum_harga = 0;
+          let sum_diskon = 0;
+          
+          for (let i = 0; i < harga.length; i++) {
+              sum_harga += harga[i];
+          }
+          for (let j = 0; j < diskon.length; j++) {
+              sum_harga += diskon[j];
+          }
+          
+          let sum_total = sum_harga - sum_diskon;
+          
+          document.getElementById("demo").innerHTML = sum_total;
+          </script> -->
+          <p style="text-align: center; font-weight: bold">Rp.{{ total }},-</p>
       </div>
     </div>
 
