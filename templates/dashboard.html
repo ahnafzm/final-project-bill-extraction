@@ -51,7 +51,7 @@
   
         <p>
           {% for prod in session['user']['produk'] %}
-          <li>{{ prod }}</li>
+            <li>{{ prod }}</li>
           {% endfor %}
           
         </p>
@@ -65,7 +65,7 @@
   
         <p>
           {% for prod in session['user']['harga'] %}
-          <li>Rp.{{ prod }},</li>
+          <li>Rp.{{ prod }},-</li>
           {% endfor %}
           
         </p>
@@ -79,7 +79,7 @@
   
         <p>
           {% for prod in session['user']['hargadisc'] %}
-          <li>Rp.{{ prod }},</li>
+          <li>Rp.{{ prod }},-</li>
           {% endfor %}
           
         </p>

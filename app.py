@@ -4,6 +4,7 @@ from psutil import users
 import pymongo
 import user.models as um
 import ocr
+import os
 from PIL import Image
 import requests
 
@@ -60,14 +61,18 @@ def cek():
 
 @app.route('/dashboard/upload', methods=['POST'])
 def upload():
+  try:
     csvfile = request.files["file"]
     img = Image.open(csvfile)
     img.save("data/images/zzzz.jpg")
     return render_template('dashboard.html', messege_info="upload berhasil")
+  except:
+    return render_template('dashboard.html', messege_info="Anda belum memasukan struk")
 
 
 @app.route('/dashboard/scan', methods=['GET'])
 def scans():
+  try:
     id = session['user']['_id']
     konek = ocr.connect()
     semua = ocr.diskon1(konek)
@@ -85,9 +90,15 @@ def scans():
     harga = session['user']['harga']
     diskon = session['user']['hargadisc']
     total = sum(harga) - sum(diskon)
-
+    os.remove("data/images/zzzz.jpg")
     pesan = "berhasil"
     #return pesan
+    return render_template('dashboard.html', messege_info=pesan, total=total)
+  except:
+    harga = session['user']['harga']
+    diskon = session['user']['hargadisc']
+    total = sum(harga) - sum(diskon)
+    pesan = "Tidak ada struk, mohon upload struk terlebih dahulu"
     return render_template('dashboard.html', messege_info=pesan, total=total)
 
 

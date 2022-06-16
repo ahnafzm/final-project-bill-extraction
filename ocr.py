@@ -200,6 +200,7 @@ def run(
         strip_optimizer(weights)  # update model (to fix SourceChangeWarning)
         
 def connect():
+    
     text=[]
     run()
 #     !python detect.py --weights custom_model/last.pt --img 640 --conf 0.25 --source data/images
@@ -208,7 +209,7 @@ def connect():
     for string in result:
         text.append(string[1].lower())
     return text
-
+    
 
 def diskon1(ocr_text): 
     disc=[]
